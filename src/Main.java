@@ -13,9 +13,12 @@ public class Main {
             System.out.println(name);
         }
 
-        System.out.println("###############################");
+        System.out.println("########################################");
 
-        //従来の方法
+        /*
+        従来の方法
+        この場合毎回数値を入れないといけないのでコピペするときに、すぐ忘れてエラー吐くのでなんとかしたい
+         */
         for(int i = 0; i < 3; ++i)
         {
             String[] list = new String[] { "climbing", "ivy_up", "ivy_down" };
