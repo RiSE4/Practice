@@ -1,4 +1,4 @@
-public enum EnumVase {
+public enum EnumVase implements IMetadata {
 
     CLIMBING(0, "climbing"),
     IVY_UP(1, "ivy_up"),
