@@ -1,3 +1,5 @@
+import jdk.nashorn.internal.ir.Block;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -38,26 +40,10 @@ public class Main {
 
         System.out.println("############### TAPIOCA ###############");
 
+        forEnumString(EnumTapioca.class, EnumTapioca.values().length);
+
     }
 
-    /*
-    public static void forItemModels(Block block, int maxMeta, String category, String[] typeName)
-    {
-        for(int i = 0; i < maxMeta + 1; ++i)
-        {
-            CocricotLite.proxy.registerItemModel(Item.getItemFromBlock(block), i, new ModelResourceLocation("cocricotlite:" + category + "/" + block.getUnlocalizedName().substring(5) + "_" + typeName[i], "inventory"));
-        }
-    }
-
-    //繰り返しヘルパー
-    private static <E extends Enum & IMetadata> void forItemModels(Class<E> targetEnum targetEnum)
-    {
-        for(int i = 0; i < targetEnum.values().length; ++i)
-        {
-
-        }
-    }
-    */
 
     //取得用メソッド
     private static <E extends Enum & IMetadata> E valueOf(Class<E> target, int meta) {
@@ -66,5 +52,15 @@ public class Main {
                 .filter(data -> data.getMetadata() == meta)
                 .findFirst()
                 .orElse(null);
+    }
+
+    //繰り返しヘルパー
+    private static <E extends Enum & IMetadata> void forEnumString(Class<E> target, int maxMeta)
+    {
+        for(int i = 0; i < maxMeta; ++i)
+        {
+            String name = valueOf(target, i).getName();
+            System.out.println(name);
+        }
     }
 }
