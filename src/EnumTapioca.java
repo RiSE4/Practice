@@ -6,7 +6,6 @@ public enum EnumTapioca implements IMetadata {
     MATCHA_TEA(3, "matcha_tea"),
     STRAWBERRY_MILK(4, "strawberry_milk");
 
-    private static final EnumTapioca[] META_LOOKUP = new EnumTapioca[values().length];
     private final int meta;
     private final String name;
 
@@ -26,28 +25,8 @@ public enum EnumTapioca implements IMetadata {
         return this.name;
     }
 
-    public static EnumTapioca byMetadata(int meta)
-    {
-        if(meta < 0 || meta >= META_LOOKUP.length)
-        {
-            meta = 0;
-        }
-
-        return META_LOOKUP[meta];
-    }
-
     public String getName()
     {
         return this.name;
-    }
-
-    static
-    {
-        EnumTapioca[] var = values();
-
-        for(EnumTapioca type : var)
-        {
-            META_LOOKUP[type.getMetadata()] = type;
-        }
     }
 }

@@ -1,36 +1,17 @@
-import jdk.nashorn.internal.ir.Block;
+import com.sun.prism.shader.Solid_ImagePattern_Loader;
+import jdk.management.resource.internal.inst.SocketOutputStreamRMHooks;
+import org.omg.CORBA.SetOverrideTypeHelper;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 public class Main {
 
     public static void main(String[] args)
     {
-        //新しくEnumVaseに作ったメソッドを使った方法
-        for(int i = 0; i < EnumVase.values().length; ++i)
-        {
-            EnumVase vase = EnumVase.valueOf(i);
-            String name = Objects.requireNonNull(vase).getName();
-
-            System.out.println(name);
-        }
-
-        System.out.println("#######################################");
-
-
-        for(int i = 0; i < EnumVase.values().length; ++i)
-        {
-            EnumVase vase = valueOf(EnumVase.class, i);
-            String name = vase.getName();
-            System.out.println(name);
-        }
-
-        System.out.println("#######################################");
-
         /*
         従来の方法
-        この場合毎回数値を入れないといけないのでコピペするときに、すぐ忘れてエラー吐くのでなんとかしたい
+        回数とStringの中身を手動で決める
+        よく間違える上、手順が増えて非効率的
          */
         for(int i = 0; i < 3; ++i)
         {
@@ -42,20 +23,23 @@ public class Main {
 
         forEnumString(EnumTapioca.class, EnumTapioca.values().length);
 
+        System.out.println("################# VASE ################");
+
+        forEnumString(EnumVase.class, EnumVase.values().length);
     }
 
 
     //取得用メソッド
-    private static <E extends Enum & IMetadata> E valueOf(Class<E> target, int meta) {
-
+    private static <E extends IMetadata> E valueOf(Class<E> target, int meta)
+    {
         return Arrays.stream(target.getEnumConstants())
-                .filter(data -> data.getMetadata() == meta)
+                .filter(i -> i.getMetadata() == meta)
                 .findFirst()
                 .orElse(null);
     }
 
     //繰り返しヘルパー
-    private static <E extends Enum & IMetadata> void forEnumString(Class<E> target, int maxMeta)
+    private static <E extends IMetadata> void forEnumString(Class<E> target, int maxMeta)
     {
         for(int i = 0; i < maxMeta; ++i)
         {
